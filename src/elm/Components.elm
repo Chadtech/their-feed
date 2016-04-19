@@ -17,8 +17,7 @@ tf'header =
   , style
     [ ("margin-top", "4px") ]
   ] 
-  [ text "Their Feed"]
-
+  [ text "Their Feed" ]
 
 handleField : String -> Signal.Address Action -> Html
 handleField content address =
@@ -28,12 +27,10 @@ handleField content address =
   , value       content
   , onKeyDown   address (\i -> HandleInput i)
   , on          "input" targetValue
-    <|  \str -> message address 
-    <|  RefreshField str
+    <|\str -> message address 
+    <|RefreshField str
   ] 
   []
-
-
 
 point : String -> Html
 point str =
@@ -54,7 +51,6 @@ veryIgnorable str =
   [ class "point veryIgnorable"
   , style [ ("display", "inline") ] ]
   [ text str ]
-
 
 break : Html
 break =
@@ -81,21 +77,33 @@ tweetView t =
   [ img 
     [ src t.image 
     , style 
-      [ ("width", "40px")
-      , ("height", "auto")
-      , ("float", "left")
+      [ ("width",        "38px")
+      , ("height",       "auto")
+      , ("float",        "left")
       , ("margin-right", "1em")
+      , ("border",       "1px solid")
+      , ("border-color", "#b0a69a")
       ]
     ] []
   , div 
-    [ style [("display", "inline")] ]
+    [ style 
+      [ ("float", "left") 
+      , ("margin-right", "1em")
+      ] 
+    ]
     [ div []
-      [ ignorable     t.name
+      [ ignorable     t.name ] 
+    , div []
+      [ veryIgnorable t.date
       , ignorable     " "
       , veryIgnorable t.handle
       ] 
-    , point t.content 
+    --, point t.content 
     ]
+  --, point t.content
+  ,   p
+  [ class "point" ]
+  [ text t.content ]
   ] 
 
 

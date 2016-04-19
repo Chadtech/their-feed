@@ -52,35 +52,28 @@ view address m =
       row
       [ column tf'header
       , column 
-        <|  handleField m.handle address
+        <|handleField m.handle address
       ]
 
     tweets = 
       intersperse line
-      <|  map tweetView m.tweets
+      <|map tweetView m.tweets
 
     body =
       intersperse break
-      <|  append [ header ] tweets
+      <|append [ header ] tweets
   in
     div
     [ style 
-      [ ("margin-left", "1em")
-      , ("margin-top",  "1em")
+      [ ("margin", "auto") 
+      , ("width", "80%")
       ]
     ]
     [ div 
-      [ class "container" ]
+      [ class "container"
+      , style [("width", "1100px")] ]
       body
     ]
-
-
-
-
-
-
-
-
 
 
 -- APP

@@ -11272,21 +11272,25 @@ Elm.Components.make = function (_elm) {
       _U.list([$Html$Attributes.$class("point ignorable"),$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "display",_1: "inline"}]))]),
       _U.list([$Html.text(str)]));
    };
-   var point = function (str) {    return A2($Html.p,_U.list([$Html$Attributes.$class("point")]),_U.list([$Html.text(str)]));};
    var tweetView = function (t) {
       return A2($Html.div,
       _U.list([]),
       _U.list([A2($Html.img,
               _U.list([$Html$Attributes.src(t.image)
-                      ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "width",_1: "40px"}
+                      ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "width",_1: "38px"}
                                                       ,{ctor: "_Tuple2",_0: "height",_1: "auto"}
                                                       ,{ctor: "_Tuple2",_0: "float",_1: "left"}
-                                                      ,{ctor: "_Tuple2",_0: "margin-right",_1: "1em"}]))]),
+                                                      ,{ctor: "_Tuple2",_0: "margin-right",_1: "1em"}
+                                                      ,{ctor: "_Tuple2",_0: "border",_1: "1px solid"}
+                                                      ,{ctor: "_Tuple2",_0: "border-color",_1: "#b0a69a"}]))]),
               _U.list([]))
               ,A2($Html.div,
-              _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "display",_1: "inline"}]))]),
-              _U.list([A2($Html.div,_U.list([]),_U.list([ignorable(t.name),ignorable(" "),veryIgnorable(t.handle)])),point(t.content)]))]));
+              _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "float",_1: "left"},{ctor: "_Tuple2",_0: "margin-right",_1: "1em"}]))]),
+              _U.list([A2($Html.div,_U.list([]),_U.list([ignorable(t.name)]))
+                      ,A2($Html.div,_U.list([]),_U.list([veryIgnorable(t.date),ignorable(" "),veryIgnorable(t.handle)]))]))
+              ,A2($Html.p,_U.list([$Html$Attributes.$class("point")]),_U.list([$Html.text(t.content)]))]));
    };
+   var point = function (str) {    return A2($Html.p,_U.list([$Html$Attributes.$class("point")]),_U.list([$Html.text(str)]));};
    var handleField = F2(function (content,address) {
       return A2($Html.input,
       _U.list([$Html$Attributes.$class("field")
@@ -11329,19 +11333,31 @@ Elm.Init.make = function (_elm) {
                                "Hell ye this is twitter dot com",
                                "Chadtech",
                                "@TheRealChadtech",
-                               "https://pbs.twimg.com/profile_images/703781047058575360/yk3vBLVE.jpg",
+                               "https://pbs.twimg.com/profile_images/721385895547576322/3KgiVLC-_bigger.jpg",
                                "20160410")
                                ,A5($Types.Tweet,
                                "home of the TWEET",
                                "Chadtech",
                                "@TheRealChadtech",
-                               "https://pbs.twimg.com/profile_images/703781047058575360/yk3vBLVE.jpg",
+                               "https://pbs.twimg.com/profile_images/721385895547576322/3KgiVLC-_bigger.jpg",
+                               "20160410")
+                               ,A5($Types.Tweet,
+                               "asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd",
+                               "Chadtech",
+                               "@TheRealChadtech",
+                               "https://pbs.twimg.com/profile_images/721385895547576322/3KgiVLC-_bigger.jpg",
+                               "20160410")
+                               ,A5($Types.Tweet,
+                               "asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd",
+                               "Chadtech",
+                               "@TheRealChadtech",
+                               "https://pbs.twimg.com/profile_images/721385895547576322/3KgiVLC-_bigger.jpg",
                                "20160410")
                                ,A5($Types.Tweet,
                                "FRESH",
                                "Chadtech",
                                "@TheRealChadtech",
-                               "https://pbs.twimg.com/profile_images/703781047058575360/yk3vBLVE.jpg",
+                               "https://pbs.twimg.com/profile_images/721385895547576322/3KgiVLC-_bigger.jpg",
                                "20160410")]);
    return _elm.Init.values = {_op: _op,initialTweets: initialTweets};
 };
@@ -11371,8 +11387,10 @@ Elm.Main.make = function (_elm) {
       var header = $Components.row(_U.list([$Components.column($Components.tf$header),$Components.column(A2($Components.handleField,m.handle,address))]));
       var body = A2($List.intersperse,$Components.$break,A2($List.append,_U.list([header]),tweets));
       return A2($Html.div,
-      _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "margin-left",_1: "1em"},{ctor: "_Tuple2",_0: "margin-top",_1: "1em"}]))]),
-      _U.list([A2($Html.div,_U.list([$Html$Attributes.$class("container")]),body)]));
+      _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "margin",_1: "auto"},{ctor: "_Tuple2",_0: "width",_1: "80%"}]))]),
+      _U.list([A2($Html.div,
+      _U.list([$Html$Attributes.$class("container"),$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "width",_1: "1100px"}]))]),
+      body)]));
    });
    var search = function (m) {    return $Effects.none;};
    var update = F2(function (action,m) {
