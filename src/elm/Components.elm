@@ -69,7 +69,7 @@ row columns =
 
 column : Html -> Html
 column element =
-  div [ class "column"] [ element ]
+  div [ class "column" ] [ element ]
 
 tweetView : Tweet ->  Html
 tweetView t =
@@ -98,12 +98,10 @@ tweetView t =
       , ignorable     " "
       , veryIgnorable t.handle
       ] 
-    --, point t.content 
     ]
-  --, point t.content
-  ,   p
-  [ class "point" ]
-  [ text t.content ]
+  , p
+    [ class "point" ]
+    [ text t.content ]
   ] 
 
 

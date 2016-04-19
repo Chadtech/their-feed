@@ -71,7 +71,8 @@ view address m =
     ]
     [ div 
       [ class "container"
-      , style [("width", "1100px")] ]
+      , style [("width", "1100px")] 
+      ]
       body
     ]
 
