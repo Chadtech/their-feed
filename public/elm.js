@@ -11285,7 +11285,9 @@ Elm.Components.make = function (_elm) {
                                                       ,{ctor: "_Tuple2",_0: "border-color",_1: "#b0a69a"}]))]),
               _U.list([]))
               ,A2($Html.div,
-              _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "float",_1: "left"},{ctor: "_Tuple2",_0: "margin-right",_1: "1em"}]))]),
+              _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "float",_1: "left"}
+                                                      ,{ctor: "_Tuple2",_0: "margin-right",_1: "1em"}
+                                                      ,{ctor: "_Tuple2",_0: "width",_1: "20em"}]))]),
               _U.list([A2($Html.div,_U.list([]),_U.list([ignorable(t.name)]))
                       ,A2($Html.div,_U.list([]),_U.list([veryIgnorable(t.date),ignorable(" "),veryIgnorable(t.handle)]))]))
               ,A2($Html.p,_U.list([$Html$Attributes.$class("point")]),_U.list([$Html.text(t.content)]))]));
@@ -11342,21 +11344,27 @@ Elm.Init.make = function (_elm) {
                                "https://pbs.twimg.com/profile_images/721385895547576322/3KgiVLC-_bigger.jpg",
                                "20160410")
                                ,A5($Types.Tweet,
-                               "asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd",
-                               "Chadtech",
-                               "@TheRealChadtech",
-                               "https://pbs.twimg.com/profile_images/721385895547576322/3KgiVLC-_bigger.jpg",
-                               "20160410")
-                               ,A5($Types.Tweet,
-                               "asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd",
-                               "Chadtech",
-                               "@TheRealChadtech",
-                               "https://pbs.twimg.com/profile_images/721385895547576322/3KgiVLC-_bigger.jpg",
-                               "20160410")
-                               ,A5($Types.Tweet,
                                "FRESH",
                                "Chadtech",
                                "@TheRealChadtech",
+                               "https://pbs.twimg.com/profile_images/721385895547576322/3KgiVLC-_bigger.jpg",
+                               "20160410")
+                               ,A5($Types.Tweet,
+                               "asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd",
+                               "Chadtech",
+                               "@TheRealChadtech",
+                               "https://pbs.twimg.com/profile_images/721385895547576322/3KgiVLC-_bigger.jpg",
+                               "20160410")
+                               ,A5($Types.Tweet,
+                               "asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd",
+                               "Chadtech",
+                               "@TheRealChadtech",
+                               "https://pbs.twimg.com/profile_images/721385895547576322/3KgiVLC-_bigger.jpg",
+                               "20160410")
+                               ,A5($Types.Tweet,
+                               "asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd",
+                               "Donald Trump",
+                               "@RealDonaldTrumppppp",
                                "https://pbs.twimg.com/profile_images/721385895547576322/3KgiVLC-_bigger.jpg",
                                "20160410")]);
    return _elm.Init.values = {_op: _op,initialTweets: initialTweets};
@@ -11389,7 +11397,7 @@ Elm.Main.make = function (_elm) {
       return A2($Html.div,
       _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "margin",_1: "auto"},{ctor: "_Tuple2",_0: "width",_1: "80%"}]))]),
       _U.list([A2($Html.div,
-      _U.list([$Html$Attributes.$class("container"),$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "width",_1: "1100px"}]))]),
+      _U.list([$Html$Attributes.$class("container"),$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "width",_1: "1200px"}]))]),
       body)]));
    });
    var search = function (m) {    return $Effects.none;};

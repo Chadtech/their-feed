@@ -85,10 +85,12 @@ tweetView t =
       , ("border-color", "#b0a69a")
       ]
     ] []
+
   , div 
     [ style 
-      [ ("float", "left") 
-      , ("margin-right", "1em")
+      [ ("float",        "left") 
+      , ("margin-right", "1em" )
+      , ("width",        "20em")
       ] 
     ]
     [ div []
@@ -99,6 +101,7 @@ tweetView t =
       , veryIgnorable t.handle
       ] 
     ]
+
   , p
     [ class "point" ]
     [ text t.content ]
