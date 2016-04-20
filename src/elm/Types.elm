@@ -2,10 +2,10 @@ module Types where
 
 type Action
   = Search
-  | HandleInput Int
+  | HandleInput  Int
   | RefreshField String
-  | GoToUser Tweet
-  | GoToTweet Tweet
+  | GoToUser     Tweet
+  | GoToTweet    Tweet
 
 type alias Model =
   { handle: String 

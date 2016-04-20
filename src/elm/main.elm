@@ -64,9 +64,7 @@ view address m =
     tweets = 
       intersperse line
       <|map (tweetView address) m.tweets
-
-    body =
-      append [ header, break ] tweets
+      
   in
     div
     [ style 
@@ -78,7 +76,7 @@ view address m =
       [ class "container"
       , style [ ("width", "1200px") ] 
       ]
-      body
+      (append [ header, break ] tweets)
     ]
 
 

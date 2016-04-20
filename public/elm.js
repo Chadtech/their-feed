@@ -11419,12 +11419,6 @@ Elm.Init.make = function (_elm) {
                                "Chadtech",
                                "@TheRealChadtech",
                                "https://pbs.twimg.com/profile_images/721385895547576322/3KgiVLC-_bigger.jpg",
-                               "20160410")
-                               ,A5($Types.Tweet,
-                               "asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd",
-                               "Donald Trump",
-                               "@RealDonaldTrumppppp",
-                               "https://pbs.twimg.com/profile_images/721385895547576322/3KgiVLC-_bigger.jpg",
                                "20160410")]);
    return _elm.Init.values = {_op: _op,initialTweets: initialTweets};
 };
@@ -11452,12 +11446,11 @@ Elm.Main.make = function (_elm) {
    var view = F2(function (address,m) {
       var tweets = A2($List.intersperse,$Components.line,A2($List.map,$Components.tweetView(address),m.tweets));
       var header = $Components.row(_U.list([$Components.column($Components.tf$header),$Components.column(A2($Components.handleField,m.handle,address))]));
-      var body = A2($List.append,_U.list([header,$Components.$break]),tweets);
       return A2($Html.div,
       _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "margin",_1: "auto"},{ctor: "_Tuple2",_0: "width",_1: "80%"}]))]),
       _U.list([A2($Html.div,
       _U.list([$Html$Attributes.$class("container"),$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "width",_1: "1200px"}]))]),
-      body)]));
+      A2($List.append,_U.list([header,$Components.$break]),tweets))]));
    });
    var search = function (m) {    return $Effects.none;};
    var update = F2(function (action,m) {

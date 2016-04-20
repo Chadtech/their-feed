@@ -33,10 +33,4 @@ initialTweets =
       "@TheRealChadtech" 
       "https://pbs.twimg.com/profile_images/721385895547576322/3KgiVLC-_bigger.jpg"
       "20160410"
-  , Tweet 
-      "asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd" 
-      "Donald Trump"
-      "@RealDonaldTrumppppp" 
-      "https://pbs.twimg.com/profile_images/721385895547576322/3KgiVLC-_bigger.jpg"
-      "20160410"
   ]
