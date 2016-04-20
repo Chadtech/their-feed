@@ -11250,6 +11250,82 @@ Elm.Types.make = function (_elm) {
                               ,Model: Model
                               ,Tweet: Tweet};
 };
+Elm.TweetComponents = Elm.TweetComponents || {};
+Elm.TweetComponents.make = function (_elm) {
+   "use strict";
+   _elm.TweetComponents = _elm.TweetComponents || {};
+   if (_elm.TweetComponents.values) return _elm.TweetComponents.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $Html$Events = Elm.Html.Events.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $Types = Elm.Types.make(_elm);
+   var _op = {};
+   var tweetContent = F2(function (address,t) {
+      return A2($Html.p,
+      _U.list([$Html$Attributes.$class("point")
+              ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "cursor",_1: "pointer"}]))
+              ,A2($Html$Events.onClick,address,$Types.GoToTweet(t))]),
+      _U.list([$Html.text(t.content)]));
+   });
+   var profilePicture = F2(function (address,t) {
+      return A2($Html.img,
+      _U.list([$Html$Attributes.src(t.image)
+              ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "width",_1: "38px"}
+                                              ,{ctor: "_Tuple2",_0: "height",_1: "auto"}
+                                              ,{ctor: "_Tuple2",_0: "float",_1: "left"}
+                                              ,{ctor: "_Tuple2",_0: "margin-right",_1: "1em"}
+                                              ,{ctor: "_Tuple2",_0: "border",_1: "1px solid"}
+                                              ,{ctor: "_Tuple2",_0: "border-color",_1: "#b0a69a"}
+                                              ,{ctor: "_Tuple2",_0: "cursor",_1: "pointer"}]))
+              ,A2($Html$Events.onClick,address,$Types.GoToUser(t))]),
+      _U.list([]));
+   });
+   var veryIgnorable = function (str) {
+      return A2($Html.p,
+      _U.list([$Html$Attributes.$class("point veryIgnorable"),$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "display",_1: "inline"}]))]),
+      _U.list([$Html.text(str)]));
+   };
+   var ignorable = function (str) {
+      return A2($Html.p,
+      _U.list([$Html$Attributes.$class("point ignorable"),$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "display",_1: "inline"}]))]),
+      _U.list([$Html.text(str)]));
+   };
+   var profileDetails = F2(function (address,t) {
+      return A2($Html.div,
+      _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "float",_1: "left"}
+                                              ,{ctor: "_Tuple2",_0: "margin-right",_1: "1em"}
+                                              ,{ctor: "_Tuple2",_0: "width",_1: "20em"}]))]),
+      _U.list([A2($Html.div,
+              _U.list([]),
+              _U.list([A2($Html.p,
+              _U.list([$Html$Attributes.$class("point ignorable")
+                      ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "cursor",_1: "pointer"}]))
+                      ,A2($Html$Events.onClick,address,$Types.GoToUser(t))]),
+              _U.list([$Html.text(t.name)]))]))
+              ,A2($Html.div,
+              _U.list([]),
+              _U.list([veryIgnorable(t.date)
+                      ,ignorable(" ")
+                      ,A2($Html.p,
+                      _U.list([$Html$Attributes.$class("point veryIgnorable")
+                              ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "cursor",_1: "pointer"},{ctor: "_Tuple2",_0: "display",_1: "inline"}]))
+                              ,A2($Html$Events.onClick,address,$Types.GoToUser(t))]),
+                      _U.list([$Html.text(t.handle)]))]))]));
+   });
+   return _elm.TweetComponents.values = {_op: _op
+                                        ,ignorable: ignorable
+                                        ,veryIgnorable: veryIgnorable
+                                        ,profilePicture: profilePicture
+                                        ,profileDetails: profileDetails
+                                        ,tweetContent: tweetContent};
+};
 Elm.Components = Elm.Components || {};
 Elm.Components.make = function (_elm) {
    "use strict";
@@ -11265,63 +11341,18 @@ Elm.Components.make = function (_elm) {
    $Maybe = Elm.Maybe.make(_elm),
    $Result = Elm.Result.make(_elm),
    $Signal = Elm.Signal.make(_elm),
+   $TweetComponents = Elm.TweetComponents.make(_elm),
    $Types = Elm.Types.make(_elm);
    var _op = {};
+   var tweetView = F2(function (address,t) {
+      return A2($Html.div,
+      _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "height",_1: "2em"},{ctor: "_Tuple2",_0: "margin-bottom",_1: "1em"}]))]),
+      _U.list([A2($TweetComponents.profilePicture,address,t),A2($TweetComponents.profileDetails,address,t),A2($TweetComponents.tweetContent,address,t)]));
+   });
    var column = function (element) {    return A2($Html.div,_U.list([$Html$Attributes.$class("column")]),_U.list([element]));};
    var row = function (columns) {    return A2($Html.div,_U.list([$Html$Attributes.$class("row")]),columns);};
    var line = A2($Html.hr,_U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "border-color",_1: "#54574d"}]))]),_U.list([]));
    var $break = A2($Html.br,_U.list([]),_U.list([]));
-   var veryIgnorable = function (str) {
-      return A2($Html.p,
-      _U.list([$Html$Attributes.$class("point veryIgnorable"),$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "display",_1: "inline"}]))]),
-      _U.list([$Html.text(str)]));
-   };
-   var ignorable = function (str) {
-      return A2($Html.p,
-      _U.list([$Html$Attributes.$class("point ignorable"),$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "display",_1: "inline"}]))]),
-      _U.list([$Html.text(str)]));
-   };
-   var tweetView = F2(function (address,t) {
-      return A2($Html.div,
-      _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "height",_1: "2em"},{ctor: "_Tuple2",_0: "margin-bottom",_1: "1em"}]))]),
-      _U.list([A2($Html.img,
-              _U.list([$Html$Attributes.src(t.image)
-                      ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "width",_1: "38px"}
-                                                      ,{ctor: "_Tuple2",_0: "height",_1: "auto"}
-                                                      ,{ctor: "_Tuple2",_0: "float",_1: "left"}
-                                                      ,{ctor: "_Tuple2",_0: "margin-right",_1: "1em"}
-                                                      ,{ctor: "_Tuple2",_0: "border",_1: "1px solid"}
-                                                      ,{ctor: "_Tuple2",_0: "border-color",_1: "#b0a69a"}
-                                                      ,{ctor: "_Tuple2",_0: "cursor",_1: "pointer"}]))
-                      ,A2($Html$Events.onClick,address,$Types.GoToUser(t))]),
-              _U.list([]))
-              ,A2($Html.div,
-              _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "float",_1: "left"}
-                                                      ,{ctor: "_Tuple2",_0: "margin-right",_1: "1em"}
-                                                      ,{ctor: "_Tuple2",_0: "width",_1: "20em"}]))]),
-              _U.list([A2($Html.div,
-                      _U.list([]),
-                      _U.list([A2($Html.p,
-                      _U.list([$Html$Attributes.$class("point ignorable")
-                              ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "cursor",_1: "pointer"}]))
-                              ,A2($Html$Events.onClick,address,$Types.GoToUser(t))]),
-                      _U.list([$Html.text(t.name)]))]))
-                      ,A2($Html.div,
-                      _U.list([]),
-                      _U.list([veryIgnorable(t.date)
-                              ,ignorable(" ")
-                              ,A2($Html.p,
-                              _U.list([$Html$Attributes.$class("point veryIgnorable")
-                                      ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "cursor",_1: "pointer"}
-                                                                      ,{ctor: "_Tuple2",_0: "display",_1: "inline"}]))
-                                      ,A2($Html$Events.onClick,address,$Types.GoToUser(t))]),
-                              _U.list([$Html.text(t.handle)]))]))]))
-              ,A2($Html.p,
-              _U.list([$Html$Attributes.$class("point")
-                      ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "cursor",_1: "pointer"}]))
-                      ,A2($Html$Events.onClick,address,$Types.GoToTweet(t))]),
-              _U.list([$Html.text(t.content)]))]));
-   });
    var point = function (str) {    return A2($Html.p,_U.list([$Html$Attributes.$class("point")]),_U.list([$Html.text(str)]));};
    var handleField = F2(function (content,address) {
       return A2($Html.input,
@@ -11339,8 +11370,6 @@ Elm.Components.make = function (_elm) {
                                    ,tf$header: tf$header
                                    ,handleField: handleField
                                    ,point: point
-                                   ,ignorable: ignorable
-                                   ,veryIgnorable: veryIgnorable
                                    ,$break: $break
                                    ,line: line
                                    ,row: row
