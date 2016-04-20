@@ -12,7 +12,7 @@ import Signal            exposing (message, mailbox, Mailbox)
 import Types             exposing (..)
 import StartApp
 import Json.Encode as JE exposing (string, encode)
-import Components        exposing (tf'header, handleField, row, column, tweetView, break, line)
+import Components        exposing (..)
 import List              exposing (..)
 import Init              exposing (initialTweets)
 
@@ -43,6 +43,12 @@ update action m =
     RefreshField field ->
       (Model field m.tweets, Effects.none)
 
+    GoToUser tweet ->
+      (m, Effects.none)
+
+    GoToTweet tweet ->
+      Debug.log "DOPE DOG YEEE" (m, Effects.none)
+
 -- VIEW
 
 view : Signal.Address Action -> Model -> Html
@@ -57,11 +63,10 @@ view address m =
 
     tweets = 
       intersperse line
-      <|map tweetView m.tweets
+      <|map (tweetView address) m.tweets
 
     body =
-      intersperse break
-      <|append [ header ] tweets
+      append [ header, break ] tweets
   in
     div
     [ style 

@@ -4,6 +4,8 @@ type Action
   = Search
   | HandleInput Int
   | RefreshField String
+  | GoToUser Tweet
+  | GoToTweet Tweet
 
 type alias Model =
   { handle: String 

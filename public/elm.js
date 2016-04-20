@@ -11236,10 +11236,19 @@ Elm.Types.make = function (_elm) {
    var _op = {};
    var Tweet = F5(function (a,b,c,d,e) {    return {content: a,name: b,handle: c,image: d,date: e};});
    var Model = F2(function (a,b) {    return {handle: a,tweets: b};});
+   var GoToTweet = function (a) {    return {ctor: "GoToTweet",_0: a};};
+   var GoToUser = function (a) {    return {ctor: "GoToUser",_0: a};};
    var RefreshField = function (a) {    return {ctor: "RefreshField",_0: a};};
    var HandleInput = function (a) {    return {ctor: "HandleInput",_0: a};};
    var Search = {ctor: "Search"};
-   return _elm.Types.values = {_op: _op,Search: Search,HandleInput: HandleInput,RefreshField: RefreshField,Model: Model,Tweet: Tweet};
+   return _elm.Types.values = {_op: _op
+                              ,Search: Search
+                              ,HandleInput: HandleInput
+                              ,RefreshField: RefreshField
+                              ,GoToUser: GoToUser
+                              ,GoToTweet: GoToTweet
+                              ,Model: Model
+                              ,Tweet: Tweet};
 };
 Elm.Components = Elm.Components || {};
 Elm.Components.make = function (_elm) {
@@ -11272,9 +11281,9 @@ Elm.Components.make = function (_elm) {
       _U.list([$Html$Attributes.$class("point ignorable"),$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "display",_1: "inline"}]))]),
       _U.list([$Html.text(str)]));
    };
-   var tweetView = function (t) {
+   var tweetView = F2(function (address,t) {
       return A2($Html.div,
-      _U.list([]),
+      _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "height",_1: "2em"},{ctor: "_Tuple2",_0: "margin-bottom",_1: "1em"}]))]),
       _U.list([A2($Html.img,
               _U.list([$Html$Attributes.src(t.image)
                       ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "width",_1: "38px"}
@@ -11282,16 +11291,37 @@ Elm.Components.make = function (_elm) {
                                                       ,{ctor: "_Tuple2",_0: "float",_1: "left"}
                                                       ,{ctor: "_Tuple2",_0: "margin-right",_1: "1em"}
                                                       ,{ctor: "_Tuple2",_0: "border",_1: "1px solid"}
-                                                      ,{ctor: "_Tuple2",_0: "border-color",_1: "#b0a69a"}]))]),
+                                                      ,{ctor: "_Tuple2",_0: "border-color",_1: "#b0a69a"}
+                                                      ,{ctor: "_Tuple2",_0: "cursor",_1: "pointer"}]))
+                      ,A2($Html$Events.onClick,address,$Types.GoToUser(t))]),
               _U.list([]))
               ,A2($Html.div,
               _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "float",_1: "left"}
                                                       ,{ctor: "_Tuple2",_0: "margin-right",_1: "1em"}
                                                       ,{ctor: "_Tuple2",_0: "width",_1: "20em"}]))]),
-              _U.list([A2($Html.div,_U.list([]),_U.list([ignorable(t.name)]))
-                      ,A2($Html.div,_U.list([]),_U.list([veryIgnorable(t.date),ignorable(" "),veryIgnorable(t.handle)]))]))
-              ,A2($Html.p,_U.list([$Html$Attributes.$class("point")]),_U.list([$Html.text(t.content)]))]));
-   };
+              _U.list([A2($Html.div,
+                      _U.list([]),
+                      _U.list([A2($Html.p,
+                      _U.list([$Html$Attributes.$class("point ignorable")
+                              ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "cursor",_1: "pointer"}]))
+                              ,A2($Html$Events.onClick,address,$Types.GoToUser(t))]),
+                      _U.list([$Html.text(t.name)]))]))
+                      ,A2($Html.div,
+                      _U.list([]),
+                      _U.list([veryIgnorable(t.date)
+                              ,ignorable(" ")
+                              ,A2($Html.p,
+                              _U.list([$Html$Attributes.$class("point veryIgnorable")
+                                      ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "cursor",_1: "pointer"}
+                                                                      ,{ctor: "_Tuple2",_0: "display",_1: "inline"}]))
+                                      ,A2($Html$Events.onClick,address,$Types.GoToUser(t))]),
+                              _U.list([$Html.text(t.handle)]))]))]))
+              ,A2($Html.p,
+              _U.list([$Html$Attributes.$class("point")
+                      ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "cursor",_1: "pointer"}]))
+                      ,A2($Html$Events.onClick,address,$Types.GoToTweet(t))]),
+              _U.list([$Html.text(t.content)]))]));
+   });
    var point = function (str) {    return A2($Html.p,_U.list([$Html$Attributes.$class("point")]),_U.list([$Html.text(str)]));};
    var handleField = F2(function (content,address) {
       return A2($Html.input,
@@ -11391,9 +11421,9 @@ Elm.Main.make = function (_elm) {
    $Types = Elm.Types.make(_elm);
    var _op = {};
    var view = F2(function (address,m) {
-      var tweets = A2($List.intersperse,$Components.line,A2($List.map,$Components.tweetView,m.tweets));
+      var tweets = A2($List.intersperse,$Components.line,A2($List.map,$Components.tweetView(address),m.tweets));
       var header = $Components.row(_U.list([$Components.column($Components.tf$header),$Components.column(A2($Components.handleField,m.handle,address))]));
-      var body = A2($List.intersperse,$Components.$break,A2($List.append,_U.list([header]),tweets));
+      var body = A2($List.append,_U.list([header,$Components.$break]),tweets);
       return A2($Html.div,
       _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "margin",_1: "auto"},{ctor: "_Tuple2",_0: "width",_1: "80%"}]))]),
       _U.list([A2($Html.div,
@@ -11408,7 +11438,9 @@ Elm.Main.make = function (_elm) {
          case "HandleInput": return _U.eq(_p0._0,13) ? {ctor: "_Tuple2",_0: A2($Types.Model,"please wait..",_U.list([])),_1: search(m)} : {ctor: "_Tuple2"
                                                                                                                                           ,_0: m
                                                                                                                                           ,_1: $Effects.none};
-         default: return {ctor: "_Tuple2",_0: A2($Types.Model,_p0._0,m.tweets),_1: $Effects.none};}
+         case "RefreshField": return {ctor: "_Tuple2",_0: A2($Types.Model,_p0._0,m.tweets),_1: $Effects.none};
+         case "GoToUser": return {ctor: "_Tuple2",_0: m,_1: $Effects.none};
+         default: return A2($Debug.log,"DOPE DOG YEEE",{ctor: "_Tuple2",_0: m,_1: $Effects.none});}
    });
    var init = {ctor: "_Tuple2",_0: A2($Types.Model,"",$Init.initialTweets),_1: $Effects.none};
    var app = $StartApp.start({init: init,update: update,view: view,inputs: _U.list([])});
