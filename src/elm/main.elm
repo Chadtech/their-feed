@@ -1,103 +1,42 @@
-import Effects          exposing (Effects, Never)
-import Html             exposing (..)
-import Html.Attributes  exposing (..)
-import Html.Events      exposing (..)
-import Http
-import Json.Decode as Json
-import Task
+import Html             exposing (p, text)
+import Html.Attributes  exposing (class)
+import Html.App         as App
+import Types            exposing (..)
+import Init             exposing (init)
+import View             exposing (view)
 import Debug
-import Window
-import Regex             exposing (regex, escape, HowMany(..))
-import Signal            exposing (message, mailbox, Mailbox)
-import Types             exposing (..)
-import StartApp
-import Json.Encode as JE exposing (string, encode)
-import Components        exposing (..)
-import List              exposing (..)
-import Init              exposing (initialTweets)
+import Ports            exposing (..)
 
-init : (Model, Effects Action)
-init = 
-  ( Model "" initialTweets, Effects.none )
+main =
+  App.program
+  { init          = (init, Cmd.none) 
+  , view          = view
+  , update        = update
+  , subscriptions = subscriptions
+  }
 
--- UPDATE
+subscriptions : Model -> Sub Msg
+subscriptions model =
+  handOverTweets GetTweets
 
-search : Model -> Effects Action
-search m = 
-  Effects.none 
-
-
-update : Action -> Model -> (Model, Effects Action)
-update action m =
-  case action of 
-
-    Search ->
-      (m, Effects.none)
+update : Msg -> Model -> (Model, Cmd Msg)
+update message m =
+  case message of 
 
     HandleInput key ->
       if key == 13 then
-        (Model "please wait.." [], search m)
+        (Model "please wait.." [], search m.twitterHandle)
       else
-        (m, Effects.none)
+        (m, Cmd.none)
 
     RefreshField field ->
-      (Model field m.tweets, Effects.none)
+      (Model field m.tweets, Cmd.none)
 
     GoToUser tweet ->
-      (m, Effects.none)
+      (m, Cmd.none)
 
     GoToTweet tweet ->
-      Debug.log "DOPE DOG YEEE" (m, Effects.none)
+      (m, Cmd.none)
 
--- VIEW
-
-view : Signal.Address Action -> Model -> Html
-view address m =
-  let
-    header =
-      row
-      [ column tf'header
-      , column 
-        <|handleField m.handle address
-      ]
-
-    tweets = 
-      intersperse line
-      <|map (tweetView address) m.tweets
-      
-  in
-    div
-    [ style 
-      [ ("margin", "auto") 
-      , ("width", "80%")
-      ]
-    ]
-    [ div 
-      [ class "container"
-      , style [ ("width", "1200px") ] 
-      ]
-      (append [ header, break ] tweets)
-    ]
-
-
--- APP
-
-app =
-  StartApp.start
-    { init   = init
-    , update = update
-    , view   = view
-    , inputs = []
-    }
-
-main =
-  app.html
-
--- PORTS
-
-port tasks : Signal (Task.Task Never ())
-port tasks =
-  app.tasks
-
-
-
+    GetTweets tweets ->
+      ({m | tweets = tweets}, Cmd.none)

@@ -1,8 +1,10 @@
-module Init where
+module Init exposing (..)
+
 import Types exposing (..)
 
-initialTweets : List Tweet
-initialTweets = 
+init : Model
+init =
+  Model ""   
   [ Tweet 
       "Hell ye this is twitter dot com" 
       "Chadtech"

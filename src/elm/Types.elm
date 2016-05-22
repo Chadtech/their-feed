@@ -1,15 +1,16 @@
-module Types where
+module Types exposing (Msg(..), Model, Tweet)
 
-type Action
-  = Search
-  | HandleInput  Int
+
+type Msg 
+  = HandleInput  Int
   | RefreshField String
   | GoToUser     Tweet
   | GoToTweet    Tweet
+  | GetTweets    (List Tweet)
 
 type alias Model =
-  { handle: String 
-  , tweets: List Tweet
+  { twitterHandle: String 
+  , tweets:        List Tweet
   }
 
 type alias Tweet =

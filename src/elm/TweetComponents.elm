@@ -1,78 +1,68 @@
-module TweetComponents where
+module TweetComponents exposing (..)
 
-import Html             exposing (..)
-import Html.Attributes  exposing (..)
-import Html.Events      exposing (..)
-import Signal           exposing (Address, message)
-import Types            exposing (..)
+import Html                 exposing (..)
+import Html.Attributes      exposing (..)
+import Html.Events          exposing (..)
+import Types                exposing (..)
+import Components           exposing (..)
+import TweetComponentStyles exposing (..)
 
-ignorable : String -> Html
-ignorable str =
-  p
-  [ class "point ignorable"
-  , style [ ("display", "inline") ] ]
-  [ text str ]
+(-) = (,)
 
-veryIgnorable : String -> Html
-veryIgnorable str =
-  p
-  [ class "point veryIgnorable"
-  , style [ ("display", "inline") ] ]
-  [ text str ]
+tweetView : Tweet -> Html Msg
+tweetView t =
+  div 
+  [ tweetViewStyle ]
+  [ profilePicture t
+  , profileDetails t
+  , tweetContent   t
+  ] 
 
-profilePicture : Address Action -> Tweet -> Html
-profilePicture address t =
+profilePicture : Tweet -> Html Msg
+profilePicture t =
   img 
   [ src t.image 
-  , style 
-    [ ("width",        "38px"     )
-    , ("height",       "auto"     )
-    , ("float",        "left"     )
-    , ("margin-right", "1em"      )
-    , ("border",       "1px solid")
-    , ("border-color", "#b0a69a"  )
-    , ("cursor",       "pointer"  )
-    ]
-  , onClick address (GoToUser t)
+  , profilePictureStyle
+  , onClick (GoToUser t)
   ] []
 
-profileDetails : Address Action -> Tweet -> Html
-profileDetails address t =
-  div 
-  [ style 
-    [ ("float",        "left") 
-    , ("margin-right", "1em" )
-    , ("width",        "20em")
-    ] 
-  ]
-  [ div []
-    [ p
-      [ class "point ignorable"
-      , style [ ("cursor", "pointer") ]
-      , onClick address (GoToUser t)
-      ] 
-      [ text t.name ]
-    ]
-  , div []
-    [ veryIgnorable t.date
-    , ignorable     " "
-    , p
-      [ class "point veryIgnorable" 
-      , style 
-        [ ("cursor",  "pointer") 
-        , ("display", "inline" )
-        ]
-      , onClick address (GoToUser t)
-      ] 
-      [ text t.handle]
-    ] 
+profileDetails : Tweet -> Html Msg
+profileDetails t =
+  div [ profileDetailsStyle ]
+  [ name t
+  , handleAndDate t
   ]
 
-tweetContent : Address Action -> Tweet -> Html
-tweetContent address t =
+name : Tweet -> Html Msg
+name t =
+  div []
+  [ p
+    [ class "point ignorable"
+    , nameStyle
+    , onClick (GoToUser t)
+    ] 
+    [ text t.name ]
+  ]
+
+handleAndDate : Tweet -> Html Msg
+handleAndDate t =
+  div []
+  [ veryIgnorable t.date
+  , ignorable     " "
+  , p
+    [ class "point veryIgnorable" 
+    , handleAndDateStyle
+    , onClick (GoToUser t)
+    ]
+    [ text t.handle ]
+  ] 
+
+tweetContent : Tweet -> Html Msg
+tweetContent t =
   p
   [ class "point" 
-  , style [ ("cursor",  "pointer") ]
-  , onClick address (GoToTweet t)
+  , tweetContentStyle
+  , onClick (GoToTweet t)
   ]
   [ text t.content ]
+

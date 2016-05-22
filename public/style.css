@@ -79,7 +79,6 @@ body {
 .container {
   padding: 0;
   box-sizing: border-box;
-  width: auto;
 }
 .row {
   content: '';

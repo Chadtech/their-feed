@@ -7,19 +7,12 @@ stylus     = require 'gulp-stylus'
 coffeeify  = require 'coffeeify'
 browserify = require 'browserify'
 
-
-n = '\n'
-i = 0
-until i is 8
-  n = n + n
-  i++
-
-
-src =
-  elm:    './src/elm/main.elm'
-  css:    './src/css/*.styl'
-  coffee: './src/js/*.coffee'
-
+paths =
+  public:   './public'
+  elm:      './src/elm/*.elm'
+  css:      './src/css/*.styl'
+  coffee:   './src/js/*.coffee'
+  electron: './main-electron.coffee'
 
 gulp.task 'coffee', ->
   bCache = {}
@@ -32,36 +25,50 @@ gulp.task 'coffee', ->
   b.bundle()
   .pipe source 'app.js'
   .pipe buffer()
-  .pipe gulp.dest './public'
+  .pipe gulp.dest paths.public
 
-
-gulp.task 'watch', ->
-  autowatch gulp, 
-    elm:    './src/elm/*.elm'
-    stylus: src.css
-    coffee: src.coffee
-
+gulp.task 'electron', ->
+  cp.exec 'coffee -c main-electron.coffee', ->
+    cp.exec 'electron main.js', ->
 
 gulp.task 'stylus', ->
-  gulp.src src.css
+  gulp.src paths.css
   .pipe stylus()
-  .pipe gulp.dest './public'
+  .pipe gulp.dest paths.public
 
-
-gulp.task 'elm', ->
+gulp.task 'elm', ->  
   cmd  = 'elm-make '
-  cmd += src.elm
+  cmd += paths.elm
   cmd += ' --output '
   cmd += './public'
   cmd += '/elm.js'
 
   cp.exec cmd, (err, stdout) ->
     console.log 'ELM ERROR', err if err
-    console.log 'ELM ', stdout
+    console.log 'ELM', stdout
+
+gulp.task 'watch', ->
+  autowatch gulp,
+    server:   './public/*.html'
+    stylus:   paths.css
+    coffee:   paths.coffee
+    elm:      paths.elm
+    electron: paths.electron
+
+gulp.task 'server', -> 
+  require './server'
+
+gulp.task 'default', 
+  [ 'elm'
+   'coffee'
+   'stylus'
+   'watch'
+   'electron'
+   'server'
+ ]
 
 
-gulp.task 'server', ->
-  require './server.coffee'
 
 
-gulp.task 'default', [ 'elm', 'coffee', 'stylus', 'watch', 'server' ]
+
+ 
