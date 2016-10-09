@@ -13,4 +13,4 @@ dummyData = [(
   )]
 
 doIt = =>
-  app.ports.handOver.send dummyData
+  app.ports.handOverTweets.send dummyData
